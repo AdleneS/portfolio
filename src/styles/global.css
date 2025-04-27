@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'AestheticRegular';
+  src: url('../public/fonts/AestheticRegular.ttf');
+}
+
+@font-face {
+  font-family: 'Dirty';
+  src: url('../public/fonts/dirty.ttf');
+}
+
+@font-face {
+  font-family: 'Superior';
+  src: url('../public/fonts/LTSuperior-Black.otf');
+}
+
+/* @media (1920px < width) {
+  html {
+    font-size: 120%;
+  }
+}
+
+@media (1024px < width <= 1920px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+@media (600px < width <= 1024px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media (width <= 600px) {
+  html {
+    font-size: 80%;
+  }
+} */
