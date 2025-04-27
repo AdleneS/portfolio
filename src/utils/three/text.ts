@@ -55,7 +55,7 @@ async function createText(
   const mesh = new THREE.Mesh(geometry, matText)
   mesh.position.set(position.x, position.y, position.z)
   mesh.tick = () => {
-    mesh.material.uniforms.threshold.value -= 0.003
+    mesh.material.uniforms.threshold.value -= 0.01
     if (mesh.material.uniforms.threshold.value <= 0)
       mesh.material.transparent = false
     // mesh.material.uniforms.range.value -= 0.001

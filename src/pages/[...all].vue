@@ -1,32 +1,20 @@
 <template>
-  <div class="bg-gray-50 h-screen">
-    <div
-      class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8"
-    >
-      <h2
-        class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
-      >
-        Not Found Page
-      </h2>
-      <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-        <div class="inline-flex rounded-md shadow">
-          <router-link
-            to="/"
-            class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:outline-none"
-            >Back Home</router-link
-          >
-        </div>
-        <ButtonRepo />
-      </div>
-    </div>
-    <div class="mx-auto max-w-screen-xl">
-      <ul class="list-disc">
-        <li>if a route does not exsit, this is the page to catch all</li>
-        <li>
-          see
-          <code>src/pages/[...all].vue</code>
-        </li>
-      </ul>
-    </div>
+  <div
+    class="h-screen w-screen flex flex-col items-center justify-center text-white-800 text-7xl absolute top-0 left-0 bg-black"
+  >
+    <h1>Error 404</h1>
+    <button class="btn bg-white text-black m-4" @click="goHome">
+      Return to Home
+    </button>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function goHome() {
+  router.push('/')
+}
+</script>

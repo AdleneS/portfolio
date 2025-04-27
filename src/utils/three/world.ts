@@ -77,7 +77,6 @@ export default class World {
     bloomPass.threshold = 0
     bloomPass.strength = 0.3
     bloomPass.radius = 0
-    console.log(bloomPass)
 
     const resizer = new Resizer(container, camera, renderer)
 

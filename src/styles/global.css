@@ -1,16 +1,16 @@
 @font-face {
   font-family: 'AestheticRegular';
-  src: url('../public/fonts/AestheticRegular.ttf');
+  src: url('../fonts/AestheticRegular.ttf');
 }
 
 @font-face {
   font-family: 'Dirty';
-  src: url('../public/fonts/dirty.ttf');
+  src: url('../fonts/dirty.ttf');
 }
 
 @font-face {
   font-family: 'Superior';
-  src: url('../public/fonts/LTSuperior-Black.otf');
+  src: url('../fonts/LTSuperior-Black.otf');
 }
 
 /* @media (1920px < width) {
