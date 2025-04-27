@@ -15,7 +15,6 @@ const scene = ref<Scene | null>(null)
 const store = usePageStore()
 const route = useRoute()
 const router = useRouter()
-
 useScrollNavigation(isScrolling)
 
 onMounted(() => {

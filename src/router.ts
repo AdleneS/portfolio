@@ -6,7 +6,7 @@ import generatedRoutes from 'virtual:generated-pages'
 const routes = setupLayouts(generatedRoutes)
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/portfolio'),
   routes,
 })
 
