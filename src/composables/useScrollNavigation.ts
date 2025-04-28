@@ -8,6 +8,7 @@ export function useScrollNavigation(isScrolling: Ref<boolean>) {
   let touchScrollY = 0
 
   const handleScroll = (event: any) => {
+    console.log(store.currentPage)
     if (isScrolling.value) return
     isScrolling.value = true
     event.deltaY > 0 ? store.increment() : store.decrement()

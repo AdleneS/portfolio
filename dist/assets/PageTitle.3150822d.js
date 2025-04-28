@@ -1,1 +1,0 @@
-import{p as o,x as s,y as r,Y as n}from"./vendor.1916fcf1.js";const i={class:"font-extrabold tracking-tight text-white absolute top-0 right-0 py-6",style:{"font-size":"clamp(2.5rem, 8vw, 4rem)","writing-mode":"sideways-lr"}},l=o({props:{title:String},setup(t){const e=t;return(a,c)=>(s(),r("h2",i,n(e.title),1))}});export{l as _};

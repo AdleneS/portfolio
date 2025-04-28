@@ -12,7 +12,7 @@ export const usePageStore = defineStore('pages', {
       this.page < 2 ? this.page++ : (this.page = 0)
     },
     decrement() {
-      if (this.page > 0) this.page--
+      this.page > 0 ? this.page-- : (this.page = 2)
     },
     setPage(newPage: number) {
       if (this.page !== newPage) this.page = newPage
