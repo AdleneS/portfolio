@@ -1,7 +1,7 @@
 <template>
   <PageTitle title=" MY EXPERIENCES" />
   <div class="square" :class="classObject"></div>
-  <div class="flex flex-col justify-center h-full">
+  <div class="flex flex-col justify-center h-full p-6">
     <ExperiencesComponent
       v-for="(experience, i) in experiences"
       :link="experience.link"
@@ -11,6 +11,7 @@
       >{{ experience.title }}</ExperiencesComponent
     >
   </div>
+  <Footer pageTitle="Experiences"></Footer>
 </template>
 
 <script setup lang="ts">

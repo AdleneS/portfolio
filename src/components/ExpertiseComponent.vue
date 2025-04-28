@@ -8,7 +8,7 @@
     </h3>
     <ul
       class="list-none text-white"
-      style="font-size: clamp(0.8rem, 2vw, 1.5rem)"
+      style="font-size: clamp(0.8rem, 1vw, 1.5rem)"
     >
       <li
         v-for="(description, i) in expertise.description"

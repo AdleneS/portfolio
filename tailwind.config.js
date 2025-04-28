@@ -6,6 +6,8 @@ module.exports = {
   theme: {
     fontFamily: {
       'aesthetic-regular': ['AestheticRegular', 'Arial'],
+      dirty: ['Dirty', 'Arial'],
+      superio: ['Superior', 'Arial'],
     },
     extend: {
       fontSize: {

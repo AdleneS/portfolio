@@ -1,6 +1,6 @@
 <template>
-  <PageTitle title=" MY EXPERTISE" />
-  <div class="flex flex-col justify-center">
+  <PageTitle title=" MY EXPERTISES" />
+  <div class="flex flex-col justify-center p-6">
     <div class="inline-grid grid-flow-row auto-rows-min gap-6 align-middle">
       <ExpertiseComponent
         v-for="(expertise, i) in expertises"
@@ -9,6 +9,7 @@
       />
     </div>
   </div>
+  <Footer pageTitle="Expertises"></Footer>
 </template>
 
 <script setup lang="ts">

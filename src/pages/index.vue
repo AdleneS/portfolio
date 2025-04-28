@@ -1,5 +1,9 @@
 <template>
-  <div></div>
+  <div
+    class="h-screen w-screen flex flex-col justify-center items-center relative"
+  >
+    <div class="scroll top-[8rem] relative"></div>
+  </div>
   <!-- <div class="separator">
     <svg
       data-name="Layer 1"
@@ -64,5 +68,50 @@
 .maskAnimation:hover {
   filter: invert();
   /* --_s: 150% 150%; */
+}
+
+.scroll {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  position: relative;
+  animation: down 1.5s infinite;
+  -webkit-animation: down 1.5s infinite;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 9px;
+    width: 9px;
+    height: 9px;
+    border-left: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes down {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translateY(15px);
+  }
+  40% {
+    transform: translate(0);
+  }
+}
+
+@-webkit-keyframes down {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translateY(15px);
+  }
+  40% {
+    transform: translate(0);
+  }
 }
 </style>

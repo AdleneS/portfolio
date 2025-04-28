@@ -2,7 +2,7 @@
   <div
     id="loader"
     class="h-screen w-screen absolute z-10 flex justify-center items-center text-6xl bg-black"
-    style="transition: all 5s ease-in-out; pointer-events: none"
+    style="transition: opacity 5s ease-in-out; pointer-events: none"
   >
     <span class="loadSpinner"></span>
   </div>
@@ -15,7 +15,7 @@
 
 .fade-out > span {
   opacity: 0;
-  transition: all 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 .loadSpinner {
   width: 48px;
