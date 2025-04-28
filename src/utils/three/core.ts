@@ -7,8 +7,8 @@ async function loadCore(camera: any) {
   const loader = new GLTFLoader()
 
   const [twistData, rubbonData] = await Promise.all([
-    await loader.loadAsync('src/assets/twist.glb'),
-    await loader.loadAsync('src/assets/rubbon.glb'),
+    await loader.loadAsync('3d/twist.glb'),
+    await loader.loadAsync('3d/rubbon.glb'),
   ])
 
   document.addEventListener('mousemove', animateCore)
