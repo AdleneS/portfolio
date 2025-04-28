@@ -12,7 +12,7 @@ async function createText(
   color = '#FFFFFF',
 ) {
   const loader = new FontLoader()
-  const texture = new THREE.TextureLoader().load('src/assets/perlin_noise.png')
+  const texture = new THREE.TextureLoader().load('/images/perlin_noise.png')
   const timer = 0
   const threshold = 2.0
   const range = 0.2

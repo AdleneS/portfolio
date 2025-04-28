@@ -4,7 +4,7 @@ function createScene(): THREE.Scene {
   const scene = new THREE.Scene()
   scene.background = new THREE.Color(0x000000)
 
-  const texture = new THREE.TextureLoader().load('src/assets/environment.jpg')
+  const texture = new THREE.TextureLoader().load('/images/environment.jpg')
   texture.minFilter = THREE.LinearFilter
   texture.colorSpace = THREE.SRGBColorSpace
 
