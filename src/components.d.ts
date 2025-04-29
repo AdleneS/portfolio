@@ -8,6 +8,7 @@ declare module 'vue' {
     ExperiencesComponent: typeof import('./components/ExperiencesComponent.vue')['default']
     ExpertiseComponent: typeof import('./components/ExpertiseComponent.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    HeaderComponent: typeof import('./components/HeaderComponent.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Loader: typeof import('./components/Loader.vue')['default']
     PageTitle: typeof import('./components/PageTitle.vue')['default']

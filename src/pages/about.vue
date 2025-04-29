@@ -1,5 +1,6 @@
 <template>
   <PageTitle title=" MY EXPERTISES" />
+  <HeaderComponent></HeaderComponent>
   <div class="flex flex-col justify-center p-6">
     <div class="inline-grid grid-flow-row auto-rows-min gap-6 align-middle">
       <ExpertiseComponent

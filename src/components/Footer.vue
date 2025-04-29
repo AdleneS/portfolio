@@ -9,7 +9,6 @@
       alt=""
     />
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>
-
     <p>Asaba Studio</p>
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>
     <p>{{ props.pageTitle }}</p>
