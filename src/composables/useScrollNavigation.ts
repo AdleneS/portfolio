@@ -11,7 +11,6 @@ export function useScrollNavigation(isScrolling: Ref<boolean>) {
     if (isScrolling.value) return
     isScrolling.value = true
     event.deltaY > 0 ? store.increment() : store.decrement()
-    console.log('scroll', event.deltaY)
     pushRouteSwitch()
   }
 
