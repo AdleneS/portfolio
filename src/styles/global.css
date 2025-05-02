@@ -14,11 +14,6 @@
 }
 
 @font-face {
-  font-family: 'Grotesk';
-  src: url('../fonts/LilGrotesk.woff2');
-}
-
-@font-face {
   font-family: 'OfficeCode';
   src: url('../fonts/OfficeCode.woff2');
 }
