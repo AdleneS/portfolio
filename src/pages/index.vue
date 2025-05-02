@@ -2,6 +2,15 @@
   <div
     class="h-screen w-screen flex flex-col justify-center items-center relative"
   >
+    <div
+      style="font-family: Dirty"
+      class="sm:hidden flex flex-nowrap flex-col items-center text-white"
+    >
+      <div style="font-size: clamp(3rem, 10vw, 10rem)">hI, i'm AdlÈnE</div>
+      <div style="font-size: clamp(1.6rem, 5vw, 10rem)">
+        fUll-StaCk deVelOpER
+      </div>
+    </div>
     <div class="scroll top-[8rem] relative"></div>
   </div>
   <!-- <div class="separator">
@@ -17,16 +26,6 @@
       ></path>
     </svg>
   </div> -->
-
-  <!-- <div
-      style="font-family: Dirty"
-      class="flex flex-nowrap flex-col items-center text-black"
-    >
-       <div style="font-size: clamp(3rem, 10vw, 10rem)">hI, i'm AdlÈnE</div>
-      <div style="font-size: clamp(1.6rem, 5vw, 10rem)">
-        fUll-StaCk deVelOpER
-      </div>
-    </div> -->
 </template>
 <script setup>
 // import { SiteState } from '@/utils/state'

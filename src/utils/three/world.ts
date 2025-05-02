@@ -53,7 +53,7 @@ export default class World {
     }
 
     composer.addPass(renderPass)
-    // renderer.autoClear = false
+    renderer.autoClear = false
     // renderer.autoClearDepth = false
 
     bloomPass = new UnrealBloomPass(
@@ -107,19 +107,8 @@ export default class World {
     loop.updatables.push(surname)
     loop.updatables.push(rubbon)
 
-    const light = createLights()
-    scene.add(
-      light.point,
-      twist,
-      light.ambient,
-      light.point1,
-      light.point2,
-      light.point3,
-      name,
-      surname,
-      rubbon,
-      background,
-    )
+    // const light = createLights()
+    scene.add(twist, name, surname, rubbon, background)
     return scene
   }
 

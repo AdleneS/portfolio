@@ -8,11 +8,10 @@ export function useScrollNavigation(isScrolling: Ref<boolean>) {
   let touchScrollY = 0
 
   const handleScroll = (event: any) => {
-    console.log(store.currentPage)
     if (isScrolling.value) return
     isScrolling.value = true
     event.deltaY > 0 ? store.increment() : store.decrement()
-
+    console.log('scroll', event.deltaY)
     pushRouteSwitch()
   }
 
@@ -22,9 +21,12 @@ export function useScrollNavigation(isScrolling: Ref<boolean>) {
 
   function handleTouchEnd(event: any) {
     const touchEndY = event.changedTouches[0].clientY
-    touchEndY < touchScrollY ? store.increment() : store.decrement()
+    if (touchEndY - touchScrollY < -100) {
+      isScrolling.value = true
+      store.increment()
+      pushRouteSwitch()
+    }
     touchScrollY = 0
-    pushRouteSwitch()
   }
 
   function pushRouteSwitch() {
@@ -38,7 +40,7 @@ export function useScrollNavigation(isScrolling: Ref<boolean>) {
           router.push('/about')
           break
         case 2:
-          router.push('/experiences')
+          router.push('/experience')
           break
         case 3:
           router.push('/contact')
@@ -51,10 +53,8 @@ export function useScrollNavigation(isScrolling: Ref<boolean>) {
   }
   onMounted(() => {
     window.addEventListener('wheel', handleScroll)
-    // document.body.addEventListener('touchmove', handleScroll)
     document.body.addEventListener('touchstart', handleTouchStart)
     document.body.addEventListener('touchend', handleTouchEnd)
-    // window.addEventListener('touchmove', handleScroll) // for desktop
   })
 
   onUnmounted(() => {

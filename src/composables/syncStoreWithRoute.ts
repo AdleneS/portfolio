@@ -6,7 +6,7 @@ export const syncStoreWithRoute = (store: any, route: any) => {
     case '/about':
       store.setPage(1)
       break
-    case '/experiences':
+    case '/experience':
       store.setPage(2)
       break
     default:

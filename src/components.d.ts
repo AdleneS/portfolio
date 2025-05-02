@@ -9,11 +9,9 @@ declare module 'vue' {
     ExpertiseComponent: typeof import('./components/ExpertiseComponent.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     HeaderComponent: typeof import('./components/HeaderComponent.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Loader: typeof import('./components/Loader.vue')['default']
     PageTitle: typeof import('./components/PageTitle.vue')['default']
     PageTransition: typeof import('./components/PageTransition.vue')['default']
-    README: typeof import('./components/README.md')['default']
   }
 }
 

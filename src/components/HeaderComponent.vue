@@ -1,7 +1,7 @@
 <template>
   <div
-    class="absolute top-[1rem] pl-[15rem] w-[90%] h-px flex gap-4"
-    style="font-family: AestheticRegular"
+    class="absolute top-[1rem] pl-[15rem] w-[90%] h-px flex gap-4 hidden sm:flex"
+    style="font-family: OfficeCode"
   >
     <div class="flex-auto">0210312032</div>
     <div class="flex-auto">CHROMATIC</div>

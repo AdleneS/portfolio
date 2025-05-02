@@ -1,7 +1,7 @@
 <template>
   <div
-    class="absolute bottom-[2rem] h-px flex w-[96%] left-[2%] gap-4"
-    style="font-family: AestheticRegular"
+    class="absolute bottom-[2rem] h-px w-[96%] left-[2%] gap-4 hidden sm:flex"
+    style="font-family: OfficeCode"
   >
     <img
       src="@/assets/images/star.webp"
@@ -9,7 +9,7 @@
       alt=""
     />
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>
-    <p>Asaba Studio</p>
+    <p>ASABA STUDIO</p>
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>
     <p>{{ props.pageTitle }}</p>
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>

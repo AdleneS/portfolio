@@ -2,7 +2,7 @@
   <div class="items-center justify-center">
     <h3
       class="mb-4 font-extrabold tracking-tight text-white"
-      style="font-size: clamp(1rem, 6vw, 3rem)"
+      style="font-size: clamp(1rem, 2vw, 3rem)"
     >
       {{ props.expertise.title }}
     </h3>

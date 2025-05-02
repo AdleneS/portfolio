@@ -2,6 +2,7 @@ html,
 body {
   margin: 0px;
   height: 100%;
+  overflow: hidden;
 }
 
 h1,
@@ -12,4 +13,12 @@ h5,
 h6,
 a {
   font-family: 'Superior';
+}
+
+@media screen and (max-width: 639px) {
+  html,
+  body,
+  main {
+    background-color: #090909 !important;
+  }
 }

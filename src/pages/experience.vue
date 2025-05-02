@@ -1,5 +1,5 @@
 <template>
-  <PageTitle title=" MY EXPERIENCES" />
+  <PageTitle title=" MY EXPERIENCE" />
   <HeaderComponent></HeaderComponent>
   <div class="square" :class="classObject"></div>
   <div class="flex flex-col justify-center h-full p-6">
@@ -12,7 +12,7 @@
       >{{ experience.title }}</ExperiencesComponent
     >
   </div>
-  <Footer pageTitle="Experiences"></Footer>
+  <Footer pageTitle="EXPERIENCE"></Footer>
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <PageTitle title=" MY EXPERTISES" />
+  <PageTitle title=" MY EXPERTISE" />
   <HeaderComponent></HeaderComponent>
   <div class="flex flex-col justify-center p-6">
     <div class="inline-grid grid-flow-row auto-rows-min gap-6 align-middle">
@@ -10,15 +10,15 @@
       />
     </div>
   </div>
-  <Footer pageTitle="Expertises"></Footer>
+  <Footer pageTitle="EXPERTISE"></Footer>
 </template>
 
 <script setup lang="ts">
 const expertises = [
   {
-    title: 'FRONTEND DEV REACT, VUE',
+    title: 'FULL-STACK DEV - REACT/VUE',
     description: [
-      '3 years of frontend development experience.',
+      '3 years of full-stack development experience.',
       'Skilled in React and Vue for dynamic UIs.',
       'Focused on seamless user experiences and clean code.',
       'Up-to-date with modern web development trends.',

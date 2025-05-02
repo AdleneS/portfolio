@@ -18,7 +18,7 @@ const router = useRouter()
 useScrollNavigation(isScrolling)
 
 onMounted(() => {
-  if (window.innerWidth > 1024) {
+  if (window.innerWidth > 639) {
     main(store).then(resolvedScene => {
       scene.value = resolvedScene
       // syncStoreWithRoute(store, route)
