@@ -85,17 +85,17 @@ export default class World {
 
   async init() {
     const { twist, rubbon } = await loadCore(camera)
-    const background = loadBackground()
+    const background = loadBackground(camera)
     const name = await createText(
       "hI, i'm AdlÈnE",
       0.3,
-      new THREE.Vector3(0, 0.2, -2),
+      new THREE.Vector3(0, 0.2, 2),
       'name',
     )
     const surname = await createText(
       'fUll-StaCk deVelOpER',
       0.16,
-      new THREE.Vector3(0, -0.1, -2),
+      new THREE.Vector3(0, -0.1, 2),
       'surname',
     )
 

@@ -1,21 +1,28 @@
 <template>
-  <div class="items-center justify-center">
+  <div class="flex flex-col group">
     <h3
-      class="mb-4 font-extrabold tracking-tight text-white"
-      style="font-size: clamp(1rem, 2vw, 3rem)"
+      class="mb-4 font-extrabold tracking-tight text-white list-title transition-transform duration-700 underline"
+      style="font-size: clamp(2.5rem, 4vw, 4rem)"
     >
       {{ props.expertise.title }}
     </h3>
     <ul
-      class="list-none text-white"
+      class="list-none text-white list-init transition-all duration-700"
       style="font-size: clamp(0.8rem, 1vw, 1.5rem)"
     >
       <li
         v-for="(description, i) in expertise.description"
         :key="i"
-        class="before:content-['-'] before:mr-2"
+        class="before:content-['-'] before:mr-2 description-item"
       >
-        {{ description }}
+        <span
+          v-for="(letter, j) in splitToLetters(description)"
+          :key="j"
+          class="fade-in-letter"
+          :style="{ transitionDelay: j * 0.04 + 's' }"
+        >
+          {{ letter }}
+        </span>
       </li>
     </ul>
   </div>
@@ -23,4 +30,51 @@
 
 <script setup>
 const props = defineProps(['expertise'])
+
+function splitToLetters(text) {
+  return text.split('')
+}
 </script>
+
+<style>
+.list-title {
+  transition: transform 0.7s ease;
+}
+.list-init {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.7s,
+    max-height 0.7s;
+}
+@media screen and (max-width: 639px) {
+  /* Sur mobile, la liste est toujours visible */
+  .list-init {
+    opacity: 1 !important;
+    max-height: 500px !important;
+    overflow: visible !important;
+  }
+  .fade-in-letter {
+    opacity: 1 !important;
+    transition-delay: 0s !important;
+  }
+}
+.group:hover .list-init {
+  opacity: 1;
+  max-height: 500px; /* Ajuste selon la taille de ta liste */
+  overflow: visible;
+}
+.description-item {
+  /* Pour éviter le flash de texte brut */
+  white-space: pre-wrap;
+}
+.fade-in-letter {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.group:hover .fade-in-letter {
+  opacity: 1;
+}
+</style>

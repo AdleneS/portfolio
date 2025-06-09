@@ -2,21 +2,23 @@
   <PageTitle title=" MY EXPERIENCE" />
   <HeaderComponent></HeaderComponent>
   <div class="square" :class="classObject"></div>
-  <div class="flex flex-col justify-center h-full p-6">
+  <div class="flex flex-col justify-center h-full p-6 items-start">
     <ExperiencesComponent
       v-for="(experience, i) in experiences"
-      :link="experience.link"
       @mouseover="hover = experience"
       @mouseleave="hover = false"
+      :details="experience.details"
       :key="i"
-      >{{ experience.title }}</ExperiencesComponent
     >
+      {{ experience.title }}
+    </ExperiencesComponent>
   </div>
   <Footer pageTitle="EXPERIENCE"></Footer>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import ExperiencesComponent from '@/components/ExperiencesComponent.vue'
 
 const hover = ref()
 
@@ -30,14 +32,30 @@ const classObject = computed(() => ({
 const experiences = [
   {
     title: 'LOUIS VUITTON',
+    details: [
+      'Full-stack consultant',
+      'UI/UX design and integration',
+      'AI projects',
+      'Stack: Vue, React, Node.js',
+    ],
     link: 'https://www.louisvuitton.com',
   },
   {
     title: 'ESENS',
+    details: [
+      'Full-stack consultant',
+      'Showcasing business applications',
+      'Stack: Vue, Svelte, Node.js',
+    ],
     link: 'https://esensconsulting.com/',
   },
   {
     title: 'INPI',
+    details: [
+      'Full-stack consultant',
+      'Process automation',
+      'Stack: React, PHP, Cypress',
+    ],
     link: 'https://www.inpi.fr',
   },
 ]

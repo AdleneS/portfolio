@@ -24,24 +24,25 @@ async function loadCore(camera: any) {
 
   const rubbon = setupModel(rubbonData)
 
-  rubbon.position.set(0, 10, 0)
   rubbon.name = 'rubbon'
-
+  rubbon.scale.multiplyScalar(1.5)
+  rubbon.position.set(2, 0.6, 0.5)
   rubbon.rotation.x = -0.7
   rubbon.rotation.z = -0.7
+  rubbon.visible = false
 
   rubbon.tick = () => {
     rubbon.rotateY((Math.PI / 2) * -0.001)
   }
 
-  twist.scale.set(0.1, 0.1, 0.1)
+  twist.scale.set(0.2, 0.2, 0.2)
   twist.tick = () => {
     const vector = new THREE.Vector3(mouseX, mouseY, 0)
     vector.unproject(camera)
     const dir = vector.sub(camera.position).normalize()
-    const distance = -camera.position.z / dir.z
+    const distance = (3 - camera.position.z) / dir.z
     const pos = camera.position.clone().add(dir.multiplyScalar(distance))
-    twist.position.set(pos.x, pos.y, 0)
+    twist.position.set(pos.x, pos.y, 3)
     twist.rotation.z -= 0.001
     twist.rotation.y -= 0.001
   }

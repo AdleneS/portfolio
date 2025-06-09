@@ -2,7 +2,7 @@
   <PageTitle title=" MY EXPERTISE" />
   <HeaderComponent></HeaderComponent>
   <div class="flex flex-col justify-center p-6">
-    <div class="inline-grid grid-flow-row auto-rows-min gap-6 align-middle">
+    <div class="flex flex-col items-start justify-center gap-6">
       <ExpertiseComponent
         v-for="(expertise, i) in expertises"
         :expertise="expertise"

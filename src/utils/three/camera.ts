@@ -3,13 +3,13 @@ import * as THREE from 'three'
 function createCamera() {
   const camera = new THREE.PerspectiveCamera(
     60, // fov = Field Of View
-    1, // aspect ratio (dummy value)
+    window.innerWidth / window.innerHeight, // aspect ratio (dummy value)
     0.1, // near clipping plane
     1000, // far clipping plane
   )
 
   // move the camera back so we can view the scene
-  camera.position.set(0, 0, 1)
+  camera.position.set(0, 0, 5)
   // let time = 0
   // camera.tick = () => {
   //   time += 0.0001
