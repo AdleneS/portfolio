@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col group">
+  <div class="flex flex-col group" style="font-family: OfficeCode">
     <h3
       class="mb-4 font-extrabold tracking-tight text-white list-title transition-transform duration-700 underline"
       style="font-size: clamp(2.5rem, 4vw, 4rem)"
