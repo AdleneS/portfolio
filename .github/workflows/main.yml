@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
+      - 'dist/**'
       - 'tests/**'
       - 'yarn.lock'
       - '.github/workflows/main.yml'
   pull_request:
     paths:
-      - 'src/**'
+      - 'dist/**'
       - 'tests/**'
       - 'yarn.lock'
       - '.github/workflows/main.yml'
