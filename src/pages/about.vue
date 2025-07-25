@@ -1,5 +1,5 @@
 <template>
-  <PageTitle title=" MY EXPERTISE" />
+  <!-- <PageTitle title=" MY EXPERTISE" /> -->
   <HeaderComponent></HeaderComponent>
   <div class="flex flex-col justify-center p-6">
     <div class="flex flex-col items-start justify-center gap-6">

@@ -1,0 +1,25 @@
+.enterDownAnim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    transform 0.7s ease,
+    opacity 0.7s ease;
+}
+.enterLeftAnim {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    transform 0.7s ease,
+    opacity 0.7s ease;
+}
+.enterUpAnim {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition:
+    transform 0.7s ease,
+    opacity 0.7s ease;
+}
+.enterAnim-active {
+  opacity: 1;
+  transform: none;
+}

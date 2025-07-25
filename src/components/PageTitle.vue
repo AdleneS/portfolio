@@ -1,6 +1,6 @@
 <template>
   <h2
-    class="font-extrabold tracking-tight text-white absolute top-0 sm:right-0 sm:px-0 sm:py-6 p-6"
+    class="font-extrabold tracking-tight text-white absolute sm:right-0 sm:px-0 sm:py-20 p-6"
     style="font-size: clamp(1.5rem, 6vw, 4rem); writing-mode: sideways-lr"
   >
     {{ props.title }}

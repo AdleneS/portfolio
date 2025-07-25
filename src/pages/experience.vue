@@ -1,5 +1,5 @@
 <template>
-  <PageTitle title=" MY EXPERIENCE" />
+  <!-- <PageTitle title=" MY EXPERIENCE" /> -->
   <HeaderComponent></HeaderComponent>
   <div class="square" :class="classObject"></div>
   <div class="flex flex-col justify-center h-full p-6 items-start">

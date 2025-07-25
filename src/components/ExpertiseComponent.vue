@@ -1,8 +1,15 @@
 <template>
-  <div class="flex flex-col group" style="font-family: OfficeCode">
+  <div
+    :class="[
+      'flex flex-col group',
+      'enterLeftAnim',
+      { 'enterAnim-active': show },
+    ]"
+    style="font-family: Funny"
+  >
     <h3
-      class="mb-4 font-extrabold tracking-tight text-white list-title transition-transform duration-700 underline"
-      style="font-size: clamp(2.5rem, 4vw, 4rem)"
+      class="mb-4 font-extrabold tracking-tight text-white list-title transition-transform duration-700 flex items-center gap-2"
+      style="font-size: clamp(1.5rem, 4vw, 4rem)"
     >
       {{ props.expertise.title }}
     </h3>
@@ -13,27 +20,46 @@
       <li
         v-for="(description, i) in expertise.description"
         :key="i"
-        class="before:content-['-'] before:mr-2 description-item"
+        class="description-item mb-0 sm:mb-5 flex items-center w-full"
       >
-        <span
-          v-for="(letter, j) in splitToLetters(description)"
-          :key="j"
-          class="fade-in-letter"
-          :style="{ transitionDelay: j * 0.04 + 's' }"
-        >
-          {{ letter }}
-        </span>
+        <img
+          src="@/assets/images/star.webp"
+          class="h-4 w-4 mr-4 relative"
+          alt=""
+        />
+        <div class="sm:block hidden">
+          <span
+            v-for="(letter, j) in splitToLetters(description)"
+            :key="j"
+            class="fade-in-letter"
+            :style="{ transitionDelay: j * 0.01 + 's' }"
+          >
+            {{ letter }}
+          </span>
+        </div>
+        <div class="sm:hidden block">
+          {{ description }}
+        </div>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
+import '@/styles/animations.css'
 const props = defineProps(['expertise'])
 
 function splitToLetters(text) {
   return text.split('')
 }
+
+const show = ref(false)
+onMounted(() => {
+  setTimeout(() => {
+    show.value = true
+  }, 200)
+})
 </script>
 
 <style>

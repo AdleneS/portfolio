@@ -18,6 +18,11 @@
   src: url('../fonts/OfficeCode.woff2');
 }
 
+@font-face {
+  font-family: 'Funny';
+  src: url('../fonts/FunnelDisplay-Light.woff2');
+}
+
 /* @media (1920px < width) {
   html {
     font-size: 120%;

@@ -1,6 +1,10 @@
 <template>
   <div
-    class="absolute bottom-[2rem] h-px w-[96%] left-[2%] gap-4 hidden sm:flex"
+    :class="[
+      'absolute bottom-[3rem] h-px w-[98%] left-[1%] gap-4 hidden sm:flex',
+      'enterDownAnim',
+      { 'enterAnim-active': show },
+    ]"
     style="font-family: OfficeCode"
   >
     <img
@@ -15,18 +19,38 @@
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>
     <p>{{ date }}</p>
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>
-    <img
-      src="@/assets/images/star.webp"
-      class="h-8 w-8 -top-1.5 relative"
-      alt=""
-    />
+    <ContactMeButtonComponent></ContactMeButtonComponent>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
 const props = defineProps({
   pageTitle: String,
 })
 
 const date = new Date().getFullYear()
+
+const show = ref(false)
+onMounted(() => {
+  setTimeout(() => {
+    show.value = true
+  }, 200)
+})
 </script>
+
+<style scoped>
+img {
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
