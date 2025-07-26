@@ -15,7 +15,6 @@ function loadBackground(camera: THREE.PerspectiveCamera) {
   const angrad = (camera.fov * Math.PI) / 180
   const fovy = camera.position.z * Math.tan(angrad / 2) * 2
   const planeGeo = new THREE.PlaneGeometry(fovy * camera.aspect, fovy)
-  // const planeGeo = new THREE.PlaneGeometry(12, 6)
   const timer = 0.0
   const matBackground = new THREE.ShaderMaterial({
     uniforms: {
@@ -35,7 +34,23 @@ function loadBackground(camera: THREE.PerspectiveCamera) {
   plane.position.x = 0
   plane.position.y = 0
   plane.position.z = 0
-  // plane.position.z = -4
+
+  // Ajout du resize
+  function handleResize() {
+    // recalculer la géométrie du plan
+    const angrad = (camera.fov * Math.PI) / 180
+    const fovy = camera.position.z * Math.tan(angrad / 2) * 2
+    const newGeo = new THREE.PlaneGeometry(fovy * camera.aspect, fovy)
+    plane.geometry.dispose()
+    plane.geometry = newGeo
+    // mettre à jour la résolution du shader
+    plane.material.uniforms.resolution.value.set(
+      window.innerWidth,
+      window.innerHeight,
+    )
+  }
+  window.addEventListener('resize', handleResize)
+
   plane.tick = () => {
     plane.material.uniforms.time.value += 0.0005
     plane.material.uniforms.mouseX.value = mouseX

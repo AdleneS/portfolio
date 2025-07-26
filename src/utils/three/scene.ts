@@ -7,7 +7,8 @@ function createScene(): THREE.Scene {
   const texture = new THREE.TextureLoader().load('images/environment.jpg')
   texture.minFilter = THREE.LinearFilter
   texture.colorSpace = THREE.SRGBColorSpace
-
+  texture.generateMipmaps = false
+  texture.minFilter = THREE.LinearFilter
   // texture.wrapS = THREE.RepeatWrapping
   // texture.wrapT = THREE.RepeatWrapping
   texture.mapping = THREE.EquirectangularReflectionMapping

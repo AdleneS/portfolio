@@ -21,6 +21,7 @@ import { updateScene } from './sceneManager'
 let camera: any
 let renderer: any
 let scene: THREE.Scene
+let background: any
 let light: any
 let loop: any
 let composer: any
@@ -78,14 +79,52 @@ export default class World {
     bloomPass.strength = 0.3
     bloomPass.radius = 0
 
-    const resizer = new Resizer(container, camera, renderer)
+    // Ajout d'une fonction pour mettre à jour les résolutions lors du resize
+    background = null
+    function updateResolutions() {
+      // background
+      if (
+        background &&
+        background.material &&
+        background.material.uniforms.resolution
+      ) {
+        background.material.uniforms.resolution.value.set(
+          window.innerWidth,
+          window.innerHeight,
+        )
+      }
+      // fxaaPass
+      if (
+        fxaaPass &&
+        fxaaPass.material &&
+        fxaaPass.material.uniforms.resolution
+      ) {
+        const pixelRatio = renderer.getPixelRatio()
+        fxaaPass.material.uniforms.resolution.value.set(
+          1 / (window.innerWidth * pixelRatio),
+          1 / (window.innerHeight * pixelRatio),
+        )
+      }
+      // bloomPass
+      if (bloomPass && bloomPass.resolution) {
+        bloomPass.resolution.set(window.innerWidth, window.innerHeight)
+      }
+    }
+
+    const resizer = new Resizer(
+      container,
+      camera,
+      renderer,
+      composer,
+      updateResolutions,
+    )
 
     loop = new Loop(camera, scene, renderer, composer)
   }
 
   async init() {
     const { twist, rubbon } = await loadCore(camera)
-    const background = loadBackground(camera)
+    background = loadBackground(camera)
     const name = await createText(
       "hI, i'm AdlÈnE",
       0.3,

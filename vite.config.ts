@@ -3,7 +3,7 @@
 import * as path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueI18n from '@intlify/vite-plugin-vue-i18n'
+// import vueI18n from '@intlify/vite-plugin-vue-i18n'
 import pkg from './package.json'
 import pages from 'vite-plugin-pages'
 import layouts from 'vite-plugin-vue-layouts'
@@ -35,11 +35,11 @@ export default defineConfig({
     }),
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
-    vueI18n({
-      runtimeOnly: true,
-      compositionOnly: true,
-      include: [path.resolve(__dirname, 'locales/**')],
-    }),
+    // vueI18n({
+    //   runtimeOnly: true,
+    //   compositionOnly: true,
+    //   include: [path.resolve(__dirname, 'locales/**')],
+    // }),
   ],
   resolve: {
     alias: {
