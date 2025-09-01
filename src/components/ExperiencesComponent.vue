@@ -9,7 +9,7 @@
   >
     <h3
       class="mb-4 font-extrabold tracking-tight text-white list-title transition-transform duration-700"
-      style="font-size: clamp(2.5rem, 8vw, 6rem)"
+      style="font-size: clamp(2.5rem, 8vmin, 6rem)"
     >
       <slot></slot>
     </h3>

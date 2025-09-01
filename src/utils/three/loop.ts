@@ -2,8 +2,10 @@ class Loop {
   private camera
   private scene
   private renderer
-  public updatables: any
   private composer
+  private then = Date.now()
+  public updatables: any
+  public delta = 0
   constructor(camera: any, scene: any, renderer: any, composer: any) {
     this.camera = camera
     this.scene = scene
@@ -14,9 +16,12 @@ class Loop {
 
   start() {
     this.renderer.setAnimationLoop(() => {
+      const now = Date.now()
+      this.delta = now - this.then
+      this.then = now
       this.tick()
-      // this.renderer.render(this.scene, this.camera)
       this.composer.render(this.scene, this.camera)
+      // this.renderer.render(this.scene, this.camera)
     })
   }
 
@@ -26,7 +31,9 @@ class Loop {
 
   tick() {
     for (const object of this.updatables) {
-      object.tick()
+      if (typeof object.tick === 'function') {
+        object.tick(this.delta)
+      }
     }
   }
 }

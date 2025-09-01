@@ -16,6 +16,7 @@ async function createText(
   const timer = 0
   const threshold = 2.0
   const range = 0.2
+  const animationSpeed = 0.0003
 
   texture.wrapS = THREE.RepeatWrapping
   texture.wrapT = THREE.RepeatWrapping
@@ -54,8 +55,8 @@ async function createText(
   })
   const mesh = new THREE.Mesh(geometry, matText)
   mesh.position.set(position.x, position.y, position.z)
-  mesh.tick = () => {
-    mesh.material.uniforms.threshold.value -= 0.003
+  mesh.tick = (delta: number) => {
+    mesh.material.uniforms.threshold.value -= animationSpeed * delta
     if (mesh.material.uniforms.threshold.value <= 0)
       mesh.material.transparent = false
     // mesh.material.uniforms.range.value -= 0.001

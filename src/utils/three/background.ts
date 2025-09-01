@@ -12,6 +12,7 @@ function loadBackground(camera: THREE.PerspectiveCamera) {
     mouseX = event.clientX
   }
 
+  const animationSpeed = 0.00005
   const angrad = (camera.fov * Math.PI) / 180
   const fovy = camera.position.z * Math.tan(angrad / 2) * 2
   const planeGeo = new THREE.PlaneGeometry(fovy * camera.aspect, fovy)
@@ -51,8 +52,8 @@ function loadBackground(camera: THREE.PerspectiveCamera) {
   }
   window.addEventListener('resize', handleResize)
 
-  plane.tick = () => {
-    plane.material.uniforms.time.value += 0.0005
+  plane.tick = (delta: number) => {
+    plane.material.uniforms.time.value += delta * animationSpeed
     plane.material.uniforms.mouseX.value = mouseX
     plane.material.uniforms.mouseY.value = mouseY
   }

@@ -31,8 +31,8 @@ async function loadCore(camera: any) {
   rubbon.rotation.z = -0.7
   rubbon.visible = false
 
-  rubbon.tick = () => {
-    rubbon.rotateY((Math.PI / 2) * -0.001)
+  rubbon.tick = (delta: number) => {
+    rubbon.rotateY((Math.PI / 2) * -0.0001 * delta)
   }
 
   twist.scale.set(0.2, 0.2, 0.2)
@@ -46,20 +46,30 @@ async function loadCore(camera: any) {
     twist.rotation.z -= 0.001
     twist.rotation.y -= 0.001
   }
-
-  twist.material = Object.assign(new MeshTransmissionMaterialImpl(6), {
-    clearCoat: 0.01,
-    clearCoatRoughness: 1,
-    chromaticAberration: 2,
-    transmission: 1,
-    roughness: 0.01,
-    thickness: 0.5,
+  const material = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    metalness: 0,
+    roughness: 0,
+    transmission: 1, // effet verre
+    thickness: 1,
     ior: 1.5,
-    time: 0,
-    distortion: 1,
-    distortionScale: 1,
-    temporalDistortion: 0.2,
+    transparent: true,
   })
+  twist.material = material
+  // twist.material = Object.assign(new MeshTransmissionMaterialImpl(1), {
+  //   clearCoat: 0.01,
+  //   clearCoatRoughness: 1,
+  //   chromaticAberration: 2,
+  //   transmission: 1,
+  //   roughness: 0.01,
+  //   thickness: 0.5,
+  //   ior: 1.5,
+  //   time: 0,
+  //   distortion: 1,
+  //   distortionScale: 1,
+  //   temporalDistortion: 0.2,
+  // })
+
   twist.name = 'twist'
 
   return { twist, rubbon }

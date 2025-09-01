@@ -9,7 +9,7 @@
   <!-- HTML !-->
   <a
     href="mailto:adlene.saba@gmail.com"
-    class="button-85 normal-case text-xl text-300 z-10"
+    class="button-85 normal-case text-xl text-300 z-10 ml-auto right-2"
     role="button"
     >CONTACT ME</a
   >
@@ -33,7 +33,7 @@
   transition: all 0.3s ease-in-out;
   display: flex;
   align-items: center;
-  margin: -1rem 0;
+  margin-top: -1rem;
   height: 3rem;
 }
 

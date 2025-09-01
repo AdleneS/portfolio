@@ -9,6 +9,7 @@
     <div class="h-px bg-white my-[0.6rem] border-b-1 flex-auto"></div>
   </div> -->
   <div
+    class="md:block hidden absolute top-[2rem] pl-[2rem] w-[90%] h-px flex gap-4"
     :class="[
       'absolute top-0 flex w-full',
       'enterUpAnim',

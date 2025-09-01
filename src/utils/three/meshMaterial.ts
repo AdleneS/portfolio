@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 export default class MeshTransmissionMaterialImpl extends THREE.MeshPhysicalMaterial {
-  constructor(samples = 6, transmissionSampler = true) {
+  constructor(samples = 1, transmissionSampler = true) {
     super()
 
     this.uniforms = {
