@@ -9,13 +9,13 @@
   >
     <h3
       class="mb-4 font-extrabold tracking-tight text-white list-title transition-transform duration-700 flex items-center gap-2"
-      style="font-size: clamp(1.5rem, 4vw, 4rem)"
+      style="font-size: clamp(1rem, 4vw, 4rem)"
     >
       {{ props.expertise.title }}
     </h3>
     <ul
       class="list-none text-white list-init transition-all duration-700"
-      style="font-size: clamp(0.8rem, 1vw, 1.5rem)"
+      style="font-size: clamp(0.7rem, 1vw, 1.5rem)"
     >
       <li
         v-for="(description, i) in expertise.description"
