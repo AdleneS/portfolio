@@ -46,16 +46,16 @@ async function loadCore(camera: any) {
     twist.rotation.z -= 0.001
     twist.rotation.y -= 0.001
   }
-  const material = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    metalness: 0,
-    roughness: 0,
-    transmission: 1, // effet verre
-    thickness: 1,
-    ior: 1.5,
-    transparent: true,
-  })
-  twist.material = material
+  // const material = new THREE.MeshPhysicalMaterial({
+  //   color: 0xffffff,
+  //   metalness: 0,
+  //   roughness: 0,
+  //   transmission: 1, // effet verre
+  //   thickness: 1,
+  //   ior: 1.5,
+  //   transparent: true,
+  // })
+  // twist.material = material
   // twist.material = Object.assign(new MeshTransmissionMaterialImpl(1), {
   //   clearCoat: 0.01,
   //   clearCoatRoughness: 1,

@@ -18,7 +18,7 @@ export function sceneModifier(value: number, scene: any, bloomPass: any) {
       scene.background = new THREE.Color(0x090909)
       scene.getObjectByName('background').visible = false
       scene.getObjectByName('name').visible = false
-      scene.getObjectByName('twist').visible = false
+      // scene.getObjectByName('twist').visible = false
       scene.getObjectByName('surname').visible = false
       scene.getObjectByName('rubbon').visible = true
       bloomPass.strength = 0.6
@@ -28,7 +28,7 @@ export function sceneModifier(value: number, scene: any, bloomPass: any) {
       scene.background = new THREE.Color(0x090909)
       scene.getObjectByName('background').visible = false
       scene.getObjectByName('name').visible = false
-      scene.getObjectByName('twist').visible = false
+      // scene.getObjectByName('twist').visible = false
       scene.getObjectByName('surname').visible = false
       scene.getObjectByName('rubbon').visible = false
       break
@@ -36,7 +36,7 @@ export function sceneModifier(value: number, scene: any, bloomPass: any) {
       scene.background = new THREE.Color(0x090909)
       scene.getObjectByName('background').visible = true
       scene.getObjectByName('name').visible = true
-      scene.getObjectByName('twist').visible = true
+      // scene.getObjectByName('twist').visible = true
       scene.getObjectByName('surname').visible = true
       scene.getObjectByName('rubbon').visible = false
       bloomPass.strength = 0.3

@@ -1,3 +1,4 @@
+// import Stats from 'three/examples/jsm/libs/stats.module.js'
 class Loop {
   private camera
   private scene
@@ -6,6 +7,7 @@ class Loop {
   private then = Date.now()
   public updatables: any
   public delta = 0
+  // private stats = new Stats()
   constructor(camera: any, scene: any, renderer: any, composer: any) {
     this.camera = camera
     this.scene = scene
@@ -15,7 +17,9 @@ class Loop {
   }
 
   start() {
+    // document.body.appendChild(this.stats.dom)
     this.renderer.setAnimationLoop(() => {
+      // this.stats.update()
       const now = Date.now()
       this.delta = now - this.then
       this.then = now

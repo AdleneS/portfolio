@@ -147,8 +147,8 @@ export default class World {
     loop.updatables.push(rubbon)
 
     // const light = createLights()
-    scene.add(twist, name, surname, rubbon, background)
-    // scene.add(name, surname, rubbon, background)
+    // scene.add(twist, name, surname, rubbon, background)
+    scene.add(name, surname, rubbon, background)
     return scene
   }
 
