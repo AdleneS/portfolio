@@ -7,10 +7,11 @@ export default function textFragmentShader() {
 
     uniform float range;
     uniform float threshold;
+    uniform float globalAlpha;
     void main()
     {
         float alpha = smoothstep(threshold - range, threshold + range, texture2D(perlinNoise, vUv.xy * 2.).r * 2.);
-        gl_FragColor = vec4(1.0, 1.0, 1.0, alpha);
+        gl_FragColor = vec4(1.0, 1.0, 1.0, alpha * globalAlpha);
         //gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
         //gl_FragColor = texture2D(perlinNoise, vUv.xy);
     }

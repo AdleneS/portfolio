@@ -1,16 +1,20 @@
 <template>
-  <!-- <PageTitle title=" MY EXPERTISE" /> -->
-  <HeaderComponent></HeaderComponent>
-  <div class="flex flex-col justify-center p-6">
-    <div class="flex flex-col items-start justify-center gap-6">
-      <ExpertiseComponent
-        v-for="(expertise, i) in expertises"
-        :expertise="expertise"
-        :key="i"
-      />
+  <section
+    id="expertise-section"
+    class="relative flex h-screen w-screen flex-col justify-center overflow-hidden bg-transparent"
+  >
+    <div class="absolute inset-0 z-0 h-full w-full" data-three-scene="1"></div>
+    <!-- <PageTitle title=" MY EXPERTISE" /> -->
+    <div class="relative z-10 flex flex-col justify-center p-6">
+      <div class="flex flex-col items-start justify-center gap-6">
+        <ExpertiseComponent
+          v-for="(expertise, i) in expertises"
+          :expertise="expertise"
+          :key="i"
+        />
+      </div>
     </div>
-  </div>
-  <Footer pageTitle="EXPERTISE"></Footer>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -18,7 +22,7 @@ const expertises = [
   {
     title: 'FULL-STACK DEV - REACT/VUE',
     description: [
-      '3 years of full-stack development experience.',
+      '4 years of full-stack development experience.',
       'Skilled in React and Vue for dynamic UIs.',
       'Focused on seamless user experiences and clean code.',
       'Up-to-date with modern web development trends.',

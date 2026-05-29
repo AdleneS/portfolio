@@ -3,60 +3,70 @@ import vertexShader from './shaders/vBackgroundShader'
 import fragmentShader from './shaders/fBackgroundShader'
 
 function loadBackground(camera: THREE.PerspectiveCamera) {
-  document.addEventListener('mousemove', mouse)
   let mouseX = 0
   let mouseY = 0
 
-  function mouse(event: any) {
+  function mouse(event: MouseEvent) {
     mouseY = event.clientY
     mouseX = event.clientX
   }
 
+  document.addEventListener('mousemove', mouse)
+
   const animationSpeed = 0.00005
-  const angrad = (camera.fov * Math.PI) / 180
-  const fovy = camera.position.z * Math.tan(angrad / 2) * 2
-  const planeGeo = new THREE.PlaneGeometry(fovy * camera.aspect, fovy)
-  const timer = 0.0
+  const getPlaneSize = () => {
+    const verticalFov = THREE.MathUtils.degToRad(camera.fov)
+    const height = camera.position.z * Math.tan(verticalFov / 2) * 2
+
+    return {
+      width: height * camera.aspect,
+      height,
+    }
+  }
+  const planeGeo = new THREE.PlaneGeometry(1, 1)
   const matBackground = new THREE.ShaderMaterial({
     uniforms: {
-      time: { type: 'f', value: timer },
+      time: { type: 'f', value: 0 },
       mouseX: { type: 'f', value: mouseX },
       mouseY: { type: 'f', value: mouseY },
       resolution: {
         value: new THREE.Vector2(window.innerWidth, window.innerHeight),
       },
+      globalAlpha: { type: 'f', value: 1 },
     },
     vertexShader: vertexShader(),
     fragmentShader: fragmentShader(),
+    transparent: true,
   })
   const plane = new THREE.Mesh(planeGeo, matBackground)
   plane.name = 'background'
   plane.receiveShadow = true
-  plane.position.x = 0
-  plane.position.y = 0
-  plane.position.z = 0
+  plane.position.set(0, 0, 0)
 
-  // Ajout du resize
-  function handleResize() {
-    // recalculer la géométrie du plan
-    const angrad = (camera.fov * Math.PI) / 180
-    const fovy = camera.position.z * Math.tan(angrad / 2) * 2
-    const newGeo = new THREE.PlaneGeometry(fovy * camera.aspect, fovy)
-    plane.geometry.dispose()
-    plane.geometry = newGeo
-    // mettre à jour la résolution du shader
+  function resizePlane() {
+    const { width, height } = getPlaneSize()
+    plane.scale.set(width, height, 1)
     plane.material.uniforms.resolution.value.set(
       window.innerWidth,
       window.innerHeight,
     )
   }
-  window.addEventListener('resize', handleResize)
+
+  plane.resize = resizePlane
+  resizePlane()
 
   plane.tick = (delta: number) => {
     plane.material.uniforms.time.value += delta * animationSpeed
     plane.material.uniforms.mouseX.value = mouseX
     plane.material.uniforms.mouseY.value = mouseY
   }
+
+  plane.dispose = () => {
+    document.removeEventListener('mousemove', mouse)
+    plane.geometry.dispose()
+    plane.material.dispose()
+  }
+
   return plane
 }
 

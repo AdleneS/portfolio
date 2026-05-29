@@ -1,10 +1,9 @@
 <template>
   <Loader></Loader>
   <main
-    class="flex bg-transparent transition align-middle h-screen flex-col justify-center"
+    class="flex min-h-screen bg-transparent transition align-middle flex-col"
   >
     <router-view />
   </main>
-  <PageTransition></PageTransition>
   <!-- <MyFooter></MyFooter> -->
 </template>

@@ -4,8 +4,10 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    About: typeof import('./components/about.vue')['default']
     CardComponent: typeof import('./components/CardComponent.vue')['default']
     ContactMeButtonComponent: typeof import('./components/ContactMeButtonComponent.vue')['default']
+    Experience: typeof import('./components/experience.vue')['default']
     ExperiencesComponent: typeof import('./components/ExperiencesComponent.vue')['default']
     ExpertiseComponent: typeof import('./components/ExpertiseComponent.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']

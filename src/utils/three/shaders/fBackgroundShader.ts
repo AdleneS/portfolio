@@ -4,6 +4,7 @@ export default function fragmentShader() {
       uniform float time; 
       uniform float mouseX;
       uniform float mouseY;
+      uniform float globalAlpha;
       varying vec3 vUv;
 
       void main(){
@@ -23,7 +24,8 @@ export default function fragmentShader() {
 
           
           //gl_FragColor = vec4(1.0 ,1.0, 1.0, 0.6);
-          gl_FragColor = mix(vec4(.0, .0, .0, 1.), vec4((cos(1. * (uv.x))), 0.6 * cos(1.6 * (uv.x)), 0.3 * cos(2.5 * (uv.y)), 1.), col);
+          vec4 color = mix(vec4(.0, .0, .0, 1.), vec4((cos(1. * (uv.x))), 0.6 * cos(1.6 * (uv.x)), 0.3 * cos(2.5 * (uv.y)), 1.), col);
+          gl_FragColor = vec4(color.rgb, color.a * globalAlpha);
 
 
           //fragColor = vec4(1. * uv.x, 0.4 * uv.x, 0.5 * (sin(uv.x + uv.y) * uv.y), 1.0);

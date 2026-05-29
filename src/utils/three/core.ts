@@ -1,21 +1,41 @@
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { setupModel } from './setupModel'
-import MeshTransmissionMaterialImpl from './meshMaterial'
 import * as THREE from 'three'
+
+function disposeMaterial(material: THREE.Material | THREE.Material[]) {
+  if (Array.isArray(material)) {
+    material.forEach(item => item.dispose())
+    return
+  }
+
+  material.dispose()
+}
+
+function disposeModel(model: THREE.Object3D) {
+  model.traverse(child => {
+    const mesh = child as THREE.Mesh
+
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) disposeMaterial(mesh.material)
+  })
+}
 
 async function loadCore(camera: any) {
   const loader = new GLTFLoader()
 
   const [twistData, rubbonData] = await Promise.all([
-    await loader.loadAsync('3d/twist.glb'),
-    await loader.loadAsync('3d/rubbon.glb'),
+    loader.loadAsync('3d/twist.glb'),
+    loader.loadAsync('3d/rubbon.glb'),
   ])
 
   document.addEventListener('mousemove', animateCore)
   let mouseX = 0
   let mouseY = 0
+  const pointerVector = new THREE.Vector3()
+  const pointerDirection = new THREE.Vector3()
+  const pointerPosition = new THREE.Vector3()
 
-  function animateCore(event: any) {
+  function animateCore(event: MouseEvent) {
     mouseX = (event.clientX / window.innerWidth) * 2 - 1
     mouseY = -(event.clientY / window.innerHeight) * 2 + 1
   }
@@ -36,26 +56,28 @@ async function loadCore(camera: any) {
   }
 
   twist.scale.set(0.2, 0.2, 0.2)
+
   twist.tick = () => {
-    const vector = new THREE.Vector3(mouseX, mouseY, 0)
-    vector.unproject(camera)
-    const dir = vector.sub(camera.position).normalize()
-    const distance = (3 - camera.position.z) / dir.z
-    const pos = camera.position.clone().add(dir.multiplyScalar(distance))
-    twist.position.set(pos.x, pos.y, 3)
+    pointerVector.set(mouseX, mouseY, 0).unproject(camera)
+    pointerDirection.copy(pointerVector).sub(camera.position).normalize()
+    const distance = (3 - camera.position.z) / pointerDirection.z
+    pointerPosition
+      .copy(camera.position)
+      .add(pointerDirection.multiplyScalar(distance))
+    twist.position.set(pointerPosition.x, pointerPosition.y, 3)
     twist.rotation.z -= 0.001
     twist.rotation.y -= 0.001
   }
-  // const material = new THREE.MeshPhysicalMaterial({
-  //   color: 0xffffff,
-  //   metalness: 0,
-  //   roughness: 0,
-  //   transmission: 1, // effet verre
-  //   thickness: 1,
-  //   ior: 1.5,
-  //   transparent: true,
-  // })
-  // twist.material = material
+  const material = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    metalness: 0,
+    roughness: 0,
+    transmission: 1, // effet verre
+    thickness: 1,
+    ior: 1.5,
+    transparent: true,
+  })
+  twist.material = material
   // twist.material = Object.assign(new MeshTransmissionMaterialImpl(1), {
   //   clearCoat: 0.01,
   //   clearCoatRoughness: 1,
@@ -72,7 +94,13 @@ async function loadCore(camera: any) {
 
   twist.name = 'twist'
 
-  return { twist, rubbon }
+  const dispose = () => {
+    document.removeEventListener('mousemove', animateCore)
+    disposeModel(twist)
+    disposeModel(rubbon)
+  }
+
+  return { twist, rubbon, dispose }
 }
 
 export { loadCore }

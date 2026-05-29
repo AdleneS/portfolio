@@ -1,34 +1,68 @@
 <template>
-  <div
-    class="h-screen w-screen flex flex-col justify-center items-center relative"
+  <section
+    id="home-section"
+    class="h-screen w-screen flex flex-col justify-center items-center relative overflow-hidden"
   >
+    <div class="absolute inset-0 z-0 h-full w-full" data-three-scene="0"></div>
+    <div
+      class="absolute bottom-0 left-0 right-0 h-80 bg-gradient-to-t from-black to-transparent"
+    />
+
     <div
       style="font-family: Dirty"
-      class="sm:hidden flex flex-nowrap flex-col items-center text-white"
+      class="sm:hidden relative z-10 flex flex-nowrap flex-col items-center text-white"
     >
       <div style="font-size: clamp(3rem, 10vw, 10rem)">hI, i'm AdlÈnE</div>
       <div style="font-size: clamp(1.6rem, 5vw, 10rem)">
         fUll-StaCk deVelOpER
       </div>
     </div>
-    <div class="scroll top-[8rem] relative"></div>
-  </div>
-  <!-- <div class="separator">
-    <svg
-      data-name="Layer 1"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1200 120"
-      preserveAspectRatio="none"
-    >
-      <path
-        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-        class="shape-fill"
-      ></path>
-    </svg>
-  </div> -->
+    <!-- <div class="scroll top-[8rem] relative z-10"></div> -->
+  </section>
+  <AboutPage />
+  <ExperiencePage />
 </template>
-<script setup>
-// import { SiteState } from '@/utils/state'
+<script setup lang="ts">
+import AboutPage from '../components/about.vue'
+import ExperiencePage from '../components/experience.vue'
+
+import main from '@/utils/three/main'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+const world = ref<Awaited<ReturnType<typeof main>> | null>(null)
+let isCreating = false
+
+const handleResize = () => {
+  if (window.innerWidth > 639 && !world.value && !isCreating) {
+    isCreating = true
+    main().then(resolvedWorld => {
+      world.value = resolvedWorld
+      isCreating = false
+    })
+  } else if (window.innerWidth <= 639 && world.value) {
+    world.value.forEach(item => item.dispose())
+    world.value = null
+  }
+}
+
+onMounted(async () => {
+  if (window.innerWidth > 639) {
+    main().then(resolvedWorld => {
+      world.value = resolvedWorld
+      document.getElementById('loader')?.classList.add('fade-out')
+    })
+  } else {
+    setTimeout(() => {
+      document.getElementById('loader')?.classList.add('fade-out')
+    }, 500)
+  }
+  window.addEventListener('resize', handleResize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
+  world.value?.forEach(item => item.dispose())
+})
 </script>
 
 <style>

@@ -1,14 +1,20 @@
 import World from './world'
 
-export default function main(store: any) {
-  const container = document.querySelector('#scene-container')
-  if (!container) return Promise.resolve(null)
+export default async function main() {
+  const containers = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-three-scene]'),
+  )
 
-  const world = new World(container, store)
-  const scenePromise = world.init().then(scene => {
-    world.start()
-    return scene
-  })
+  if (!containers.length) return []
+  const worlds = await Promise.all(
+    containers.map(async container => {
+      const scenePage = Number(container.dataset.threeScene ?? 0)
+      const world = new World(container, scenePage)
+      await world.init()
+      world.start()
+      return world
+    }),
+  )
 
-  return scenePromise
+  return worlds
 }

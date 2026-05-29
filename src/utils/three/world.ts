@@ -1,166 +1,142 @@
-import { createCamera } from './camera'
-import { createScene } from './scene'
-import { createRenderer } from './renderer'
-import { Resizer, setSize } from './resizer'
 import * as THREE from 'three'
-import { loadCore } from './core'
-import { createLights } from './light'
-import { animate } from './animate'
-import { Loop } from './loop'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js'
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js'
-// import { GUI } from 'dat.gui'
-import { createParticles } from './particles'
+import { createCamera } from './camera'
+import { createScene } from './scene'
+import { createRenderer } from './renderer'
+import { Resizer } from './resizer'
+import { loadCore } from './core'
+import { Loop } from './loop'
 import { createText } from './text'
 import { loadBackground } from './background'
-import { updateScene } from './sceneManager'
-
-let camera: any
-let renderer: any
-let scene: THREE.Scene
-let background: any
-let light: any
-let loop: any
-let composer: any
-let bloomPass: any
-let store: any
-const bloom = { strength: 0, radius: 0, threshold: 0 }
-// const gui = new GUI()
-// let particles: any
+import { sceneModifier } from './sceneManager'
 
 export default class World {
-  constructor(container: Element | null, piniaStore: any) {
-    store = piniaStore
-    camera = createCamera()
-    scene = createScene()
-    renderer = createRenderer()
-    // particles = createParticles()
-    container?.append(renderer.domElement)
-    renderer.setPixelRatio(window.devicePixelRatio)
-    renderer.setSize(container?.clientWidth, container?.clientHeight)
-    composer = new EffectComposer(renderer)
-    const fxaaPass = new ShaderPass(FXAAShader)
-    const renderPass = new RenderPass(scene, camera)
-    const pixelRatio = renderer.getPixelRatio()
-    const uniforms = fxaaPass.material.uniforms
-    uniforms.resolution = {
-      value: new THREE.Vector2(
-        1 / (window.innerWidth * pixelRatio),
-        1 / (window.innerHeight * pixelRatio),
-      ),
-    }
+  private camera: any
+  private renderer: any
+  private scene: THREE.Scene
+  private background: any = null
+  private loop: any
+  private composer: any
+  private bloomPass: any
+  private resizer: Resizer
+  private fxaaPass: any
+  private core: any = null
+  private renderSize = new THREE.Vector2()
 
-    composer.addPass(renderPass)
-    renderer.autoClear = false
-    // renderer.autoClearDepth = false
+  constructor(
+    private container: Element,
+    private scenePage = 0,
+  ) {
+    this.camera = createCamera()
+    this.scene = createScene()
+    this.renderer = createRenderer()
+    this.composer = new EffectComposer(this.renderer)
+    this.fxaaPass = new ShaderPass(FXAAShader)
 
-    bloomPass = new UnrealBloomPass(
+    this.container.append(this.renderer.domElement)
+
+    const renderPass = new RenderPass(this.scene, this.camera)
+    this.bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
       0,
       0,
       1,
     )
-    composer.addPass(bloomPass)
-    composer.addPass(fxaaPass)
-    bloomPass.clearColor = new THREE.Color(0xffffff)
-    // gui.add(bloom, 'threshold', 0.0, 1.0).onChange(function (value: any) {
-    //   bloomPass.threshold = Number(value)
-    // })
-    // gui.add(bloom, 'radius', 0.0, 10.0).onChange(function (value: any) {
-    //   bloomPass.radius = Number(value)
-    // })
-    // gui.add(bloom, 'strength', 0.0, 10.0).onChange(function (value: any) {
-    //   bloomPass.strength = Number(value)
-    // })
-    bloomPass.threshold = 0
-    bloomPass.strength = 0.3
-    bloomPass.radius = 0
 
-    // Ajout d'une fonction pour mettre à jour les résolutions lors du resize
-    background = null
-    function updateResolutions() {
-      // background
-      if (
-        background &&
-        background.material &&
-        background.material.uniforms.resolution
-      ) {
-        background.material.uniforms.resolution.value.set(
-          window.innerWidth,
-          window.innerHeight,
+    this.composer.addPass(renderPass)
+    this.composer.addPass(this.bloomPass)
+    this.composer.addPass(this.fxaaPass)
+
+    this.renderer.autoClear = false
+    this.bloomPass.clearColor = new THREE.Color(0xffffff)
+    this.bloomPass.threshold = 0
+    this.bloomPass.strength = 0.3
+    this.bloomPass.radius = 0
+
+    this.resizer = new Resizer(
+      this.container,
+      this.camera,
+      this.renderer,
+      this.composer,
+      () => this.updateResolutions(),
+    )
+
+    this.loop = new Loop(this.camera, this.scene, this.renderer, this.composer)
+  }
+
+  private updateResolutions() {
+    this.renderer.getDrawingBufferSize(this.renderSize)
+
+    if (this.background?.material?.uniforms?.resolution) {
+      if (typeof this.background.resize === 'function') {
+        this.background.resize()
+      } else {
+        this.background.material.uniforms.resolution.value.set(
+          this.renderSize.x,
+          this.renderSize.y,
         )
-      }
-      // fxaaPass
-      if (
-        fxaaPass &&
-        fxaaPass.material &&
-        fxaaPass.material.uniforms.resolution
-      ) {
-        const pixelRatio = renderer.getPixelRatio()
-        fxaaPass.material.uniforms.resolution.value.set(
-          1 / (window.innerWidth * pixelRatio),
-          1 / (window.innerHeight * pixelRatio),
-        )
-      }
-      // bloomPass
-      if (bloomPass && bloomPass.resolution) {
-        bloomPass.resolution.set(window.innerWidth, window.innerHeight)
       }
     }
 
-    const resizer = new Resizer(
-      container,
-      camera,
-      renderer,
-      composer,
-      updateResolutions,
+    this.fxaaPass.material.uniforms.resolution.value.set(
+      1 / this.renderSize.x,
+      1 / this.renderSize.y,
     )
 
-    loop = new Loop(camera, scene, renderer, composer)
+    if (this.bloomPass.resolution) {
+      this.bloomPass.resolution.set(this.renderSize.x, this.renderSize.y)
+    }
   }
 
   async init() {
-    const { twist, rubbon } = await loadCore(camera)
-    background = loadBackground(camera)
-    const name = await createText(
-      "hI, i'm AdlÈnE",
-      0.3,
-      new THREE.Vector3(0, 0.2, 2),
-      'name',
-    )
-    const surname = await createText(
-      'fUll-StaCk deVelOpER',
-      0.16,
-      new THREE.Vector3(0, -0.1, 2),
-      'surname',
-    )
+    this.background = loadBackground(this.camera)
+    const [core, name, surname] = await Promise.all([
+      loadCore(this.camera),
+      createText("hI, i'm AdlÈnE", 0.3, new THREE.Vector3(0, 0.2, 2), 'name'),
+      createText(
+        'fUll-StaCk deVelOpER',
+        0.16,
+        new THREE.Vector3(0, -0.1, 2),
+        'surname',
+      ),
+    ])
+    this.core = core
+    const { twist, rubbon } = core
 
-    updateScene(store, scene, bloomPass)
+    this.loop.updatables.push(twist)
+    this.loop.updatables.push(this.background)
+    this.loop.updatables.push(name)
+    this.loop.updatables.push(surname)
+    this.loop.updatables.push(rubbon)
 
-    loop.updatables.push(twist)
-    loop.updatables.push(background)
-    loop.updatables.push(name)
-    loop.updatables.push(surname)
-    loop.updatables.push(rubbon)
-
-    // const light = createLights()
-    // scene.add(twist, name, surname, rubbon, background)
-    scene.add(name, surname, rubbon, background)
-    return scene
+    this.scene.add(name, surname, rubbon, this.background, twist)
+    sceneModifier(this.scenePage, this.scene, this.bloomPass)
+    return this.scene
   }
 
   render() {
-    renderer.render(scene, camera)
+    this.renderer.render(this.scene, this.camera)
   }
 
   start() {
-    loop.start()
+    this.loop.start()
   }
 
   stop() {
-    loop.stop()
+    this.loop.stop()
+  }
+
+  dispose() {
+    this.stop()
+    this.resizer.dispose()
+    this.core?.dispose?.()
+    this.background?.dispose?.()
+    this.composer.dispose?.()
+    this.renderer.dispose()
+    this.renderer.domElement.remove()
   }
 }

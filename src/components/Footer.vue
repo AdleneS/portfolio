@@ -16,7 +16,7 @@
       <div class="h-px bg-white my-3 mx-2 border-b-1 flex-auto"></div>
       <p>ASABA STUDIO</p>
       <div class="h-px bg-white my-3 mx-2 border-b-1 flex-auto"></div>
-      <p>{{ props.pageTitle }}</p>
+      <p>PORTFOLIO</p>
       <div class="h-px bg-white my-3 mx-2 border-b-1 flex-auto"></div>
       <p>{{ date }}</p>
       <div class="h-px bg-white my-3 mx-2 border-b-1 flex-auto"></div>
@@ -27,10 +27,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-
-const props = defineProps({
-  pageTitle: String,
-})
 
 const date = new Date().getFullYear()
 

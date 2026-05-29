@@ -5,14 +5,23 @@ const setSize = (
   composer?: any,
   updateResolutions?: (() => void) | null,
 ) => {
-  camera.aspect = container?.clientWidth / container?.clientHeight
+  if (!container) return
+
+  const width = container.clientWidth
+  const height = container.clientHeight
+  const pixelRatio = Math.min(window.devicePixelRatio, 2)
+
+  camera.aspect = width / height
   camera.updateProjectionMatrix()
-  if (composer) composer.setSize(container.clientWidth, container.clientHeight)
-  renderer.setSize(container?.clientWidth, container?.clientHeight)
-  renderer.setPixelRatio(window.devicePixelRatio)
+  renderer.setPixelRatio(pixelRatio)
+  renderer.setSize(width, height)
+  if (composer) composer.setSize(width, height)
+  if (updateResolutions) updateResolutions()
 }
 
 class Resizer {
+  private resizeHandler: () => void
+
   constructor(
     container: any,
     camera: any,
@@ -20,13 +29,17 @@ class Resizer {
     composer?: any,
     updateResolutions?: (() => void) | null,
   ) {
-    // set initial size on load
-    window.addEventListener('resize', () => {
-      // set the size again if a resize occurs
+    this.resizeHandler = () => {
       setSize(container, camera, renderer, composer, updateResolutions)
       this.onResize()
-    })
+    }
+
+    window.addEventListener('resize', this.resizeHandler)
     setSize(container, camera, renderer, composer, updateResolutions)
+  }
+
+  dispose() {
+    window.removeEventListener('resize', this.resizeHandler)
   }
 
   onResize() {}
