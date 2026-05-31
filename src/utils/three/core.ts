@@ -72,9 +72,10 @@ async function loadCore(camera: any) {
     color: 0xffffff,
     metalness: 0,
     roughness: 0,
-    transmission: 1, // effet verre
+    transmission: 1,
     thickness: 1,
     ior: 1.5,
+    dispersion: 10,
     transparent: true,
   })
   twist.material = material

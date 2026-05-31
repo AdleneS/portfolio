@@ -14,7 +14,7 @@
         alt=""
       />
       <div class="h-px bg-white my-3 mx-2 border-b-1 flex-auto"></div>
-      <p>ASABA STUDIO</p>
+      <p>ADLÈNE</p>
       <div class="h-px bg-white my-3 mx-2 border-b-1 flex-auto"></div>
       <p>PORTFOLIO</p>
       <div class="h-px bg-white my-3 mx-2 border-b-1 flex-auto"></div>

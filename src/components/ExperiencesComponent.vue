@@ -1,43 +1,53 @@
 <template>
   <div
     :class="[
-      'flex flex-col group',
-      'enterLeftAnim',
+      'exp-card group relative overflow-hidden rounded-2xl',
+      props.exp.colorClass,
       { 'enterAnim-active': show },
+      'enterLeftAnim',
     ]"
-    style="font-family: Funny"
   >
-    <h3
-      class="mb-4 font-extrabold tracking-tight text-white list-title transition-transform duration-700"
-      style="font-size: clamp(2.5rem, 8vmin, 6rem)"
+    <div
+      class="absolute w-[calc(100%+1px)] inset-0 flex translate-y-full flex-col overlay-blur p-6 transition-transform duration-500 ease-in-out group-hover:translate-y-0"
     >
-      <slot></slot>
-    </h3>
-    <ul
-      v-if="props.details && props.details.length"
-      class="list-none text-white list-init transition-all duration-700"
-      style="font-size: clamp(0.8rem, 1vw, 2rem)"
-    >
-      <li
-        v-for="(description, i) in props.details"
-        :key="i"
-        class="description-item mb-0 sm:mb-5 flex items-center w-full"
-      >
-        <img
-          src="@/assets/images/star.webp"
-          class="h-4 w-4 mr-4 relative rotation-animation"
-          alt=""
-        />
-        <span
-          v-for="(letter, j) in splitToLetters(description)"
-          :key="j"
-          class="fade-in-letter"
-          :style="{ transitionDelay: j * 0.01 + 's' }"
+      <div>
+        <h3
+          class="text-3xl font-extrabold text-white drop-shadow-lg p-0"
+          style="font-family: Funny"
         >
-          {{ letter }}
-        </span>
-      </li>
-    </ul>
+          {{ props.exp.job }}
+        </h3>
+        <h2
+          class="text-xl font-thin text-white drop-shadow-lg"
+          style="font-family: Funny"
+        >
+          {{ props.exp.country }} · {{ props.exp.duration }}
+        </h2>
+        <hr class="mt-4" />
+      </div>
+
+      <div class="flex flex-1 items-center">
+        <ul
+          v-if="props.exp.details && props.exp.details.length"
+          class="list-none space-y-3 text-white"
+        >
+          <li
+            v-for="(description, i) in props.exp.details"
+            :key="i"
+            class="flex items-center"
+          >
+            <img
+              src="@/assets/images/star.webp"
+              class="mr-3 h-6 w-6 flex-shrink-0 rotation-animation"
+              alt=""
+            />
+            <span class="text-xl" style="font-family: Funny">{{
+              description
+            }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,14 +55,9 @@
 import { ref, onMounted } from 'vue'
 
 const props = defineProps({
-  details: {
-    type: Array as () => string[],
-    default: () => [],
-  },
+  exp: { type: Object, required: true },
 })
-function splitToLetters(text: string) {
-  return text.split('')
-}
+
 const show = ref(false)
 onMounted(() => {
   setTimeout(() => {
@@ -62,43 +67,42 @@ onMounted(() => {
 </script>
 
 <style>
-.list-title {
-  transition: transform 0.7s ease;
+.overlay-blur {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.list-init {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition:
-    opacity 0.7s,
-    max-height 0.7s;
+.exp-card {
+  height: 28rem;
+  flex: 1 1 auto;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-@media screen and (max-width: 639px) {
-  .list-init {
-    opacity: 1 !important;
-    max-height: 500px !important;
-    overflow: visible !important;
-  }
-  .fade-in-letter {
-    opacity: 1 !important;
-    transition-delay: 0s !important;
-  }
+
+.inpi {
+  background-image: url('@/assets/images/logo-inpi.png');
+  background-color: rgb(43, 93, 150);
 }
-.group:hover .list-init {
-  opacity: 1;
-  max-height: 500px;
-  overflow: visible;
+
+.louis-vuitton {
+  background-image: url('@/assets/images/logo-louis_vuitton.svg');
+  background-color: rgb(49, 23, 9);
 }
-.description-item {
-  white-space: pre-wrap;
+
+.esens {
+  background-image: url('@/assets/images/logo-esens.png');
+  background-color: #f28f5d;
 }
-.fade-in-letter {
-  display: inline-block;
-  opacity: 0;
-  transition: opacity 0.3s;
+
+.cdlp {
+  background-image: url('@/assets/images/logo-cdlp1.svg');
+  background-color: #fcd125;
 }
-.group:hover .fade-in-letter {
-  opacity: 1;
+
+.effy {
+  background-image: url('@/assets/images/logo-effy.svg');
+  background-color: #161637;
 }
 </style>

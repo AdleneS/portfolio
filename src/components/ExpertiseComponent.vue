@@ -15,7 +15,7 @@
     </h3>
     <ul
       class="list-none text-white list-init transition-all duration-700"
-      style="font-size: clamp(0.7rem, 1vw, 1.5rem)"
+      style="font-size: clamp(0.7rem, 2vw, 1.5rem)"
     >
       <li
         v-for="(description, i) in expertise.description"
@@ -75,7 +75,6 @@ onMounted(() => {
     max-height 0.7s;
 }
 @media screen and (max-width: 639px) {
-  /* Sur mobile, la liste est toujours visible */
   .list-init {
     opacity: 1 !important;
     max-height: 500px !important;
@@ -88,11 +87,10 @@ onMounted(() => {
 }
 .group:hover .list-init {
   opacity: 1;
-  max-height: 500px; /* Ajuste selon la taille de ta liste */
+  max-height: 500px;
   overflow: visible;
 }
 .description-item {
-  /* Pour éviter le flash de texte brut */
   white-space: pre-wrap;
 }
 .fade-in-letter {
