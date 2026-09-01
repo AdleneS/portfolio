@@ -53,7 +53,7 @@ const experiences = [
   {
     title: 'INPI',
     job: 'Full-stack consultant',
-    duration: '6 months',
+    duration: '7 months',
     country: 'Paris',
     colorClass: 'inpi',
     details: ['Process automation', 'Stack: React, PHP, Cypress'],
@@ -62,7 +62,7 @@ const experiences = [
     title: 'COMPTOIR DE LA PRESSE',
     job: 'Full-stack developer',
     duration: '6 months',
-    country: 'Bordeaux',
+    country: 'Paris',
     colorClass: 'cdlp',
     details: [
       'Designed and developed end-to-end online store',
@@ -72,8 +72,8 @@ const experiences = [
   {
     title: 'EFFY',
     job: 'AI consultant',
-    duration: '2 months',
-    country: 'Bordeaux',
+    duration: '6 months',
+    country: 'Paris',
     colorClass: 'effy',
     details: [
       'Designed and developed a ChatGPT APP',
